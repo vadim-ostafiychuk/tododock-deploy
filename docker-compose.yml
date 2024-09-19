@@ -16,7 +16,7 @@ services:
       - NODE_ENV=production
       - PORT=4000
       - MONGODB_URL=mongodb://user:mCrbX6TT@mongodb/tododock
-      - JWT_PRIVATE_KEY=SECRET
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
     depends_on:
       - mongodb
   mongodb:

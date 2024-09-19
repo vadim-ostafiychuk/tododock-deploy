@@ -1,0 +1,29 @@
+services:
+  web:
+    build: ./tododock-client
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_BASE_URL=http://server/api
+    depends_on:
+      - server
+  server:
+    build: ./tododock-server
+    hostname: server
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - MONGODB_URL=mongodb://user:mCrbX6TT@mongodb/tododock
+      - JWT_PRIVATE_KEY=SECRET
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    hostname: mongodb
+    volumes:
+      - ./mongodb/initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=osxazcN0
